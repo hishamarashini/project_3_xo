@@ -20,13 +20,15 @@ def CheckTargetStatus(_target):
     return False
 
 def ComputerChoose():
-    global game_grid
+    global player_choice_history
+    global computer_choice_history
     choice = -1
     while True:
-        random_choice = random.randint(0, 9) # choosing a random number from the valid cells in the grid
-        if(game_grid[random_choice] != "X" or game_grid[random_choice] != "O"): # checking if the random choice collides with a previous choice
+        random_choice = random.randint(0, 8) # choosing a random number from the valid cells in the grid
+        if(random_choice not in player_choice_history and random_choice not in computer_choice_history): # checking if the random choice collides with a previous choice
             choice = random_choice # if it doesnt, choose this cell and break out of the loop. else repeat until it doesn't collide
             break
+    return choice
 
 def GenGameGrid():
     global player_choice_history
@@ -47,3 +49,19 @@ def GenGameGrid():
             to_return += f"{i} | "
     
     return to_return
+
+while(True):
+    print(GenGameGrid())
+    user_input = input("Choose a number from the grid to make a move; or q to quit game: ")
+    if(user_input == "q"):
+        print("Thanks for playing the game.")
+        break
+    if(user_input.isdigit):
+        user_input = int(user_input)
+    
+    player_choice_history.append(user_input - 1)
+    computer_choice_history.append(ComputerChoose())
+    if(CheckTargetStatus(player_choice_history)):
+        print("You won. Good job.")
+    if(CheckTargetStatus(computer_choice_history)):
+        print("Computer won. Better luck next time.")
