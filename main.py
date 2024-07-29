@@ -4,6 +4,21 @@ game_grid = []
 player_choice_history = []
 computer_choice_history = []
 
+def CheckTargetStatus(_target):
+    for i in range(3):
+        if(i%3 == 0):
+            if(i in _target and i + 1 in _target and i + 2 in _target):
+                return True
+        if(i < 3):
+            if(i in _target and i + 3 in _target and i + 6 in _target):
+                return True
+    
+    if(0 in _target and 4 in _target and 8 in _target):
+        return True
+    if(2 in _target and 4 in _target and 6 in _target):
+        return True
+    return False
+
 def ComputerChoose():
     global game_grid
     choice = -1
@@ -32,5 +47,3 @@ def GenGameGrid():
             to_return += f"{i} | "
     
     return to_return
-
-print(GenGameGrid())
