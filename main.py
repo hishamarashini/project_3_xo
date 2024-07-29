@@ -14,12 +14,23 @@ def ComputerChoose():
             break
 
 def GenGameGrid():
+    global player_choice_history
+    global computer_choice_history
+
     to_return = ""
-    for i in range(9):
-        if((i+1)%3 == 0):
+    for j in range(9):
+        if(j in player_choice_history):
+            i = "X"
+        elif(j in computer_choice_history):
+            i = "O"
+        else:
+            i = j + 1
+        
+        if((j+1)%3 == 0):
             to_return += f"{i}\n"
         else:
             to_return += f"{i} | "
+    
     return to_return
 
 print(GenGameGrid())
