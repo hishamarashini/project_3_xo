@@ -12,3 +12,18 @@ The player who succeeds in placing three of their marks in a horizontal, vertica
 
 #### Features
 * Existing Feature
+
+
+#### Data Model
+
+#### Testing
+#### Bugs
+#### Validating
+* PEP8
+    * No errors
+
+#### Deployment
+
+
+#### Credits
+* Wikipidia details of the game.
