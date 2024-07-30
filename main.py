@@ -1,3 +1,4 @@
+import os
 import random
 
 game_grid = []
@@ -6,18 +7,19 @@ computer_choice_history = []
 
 def CheckTargetStatus(_target):
     for i in range(3):
-        if(i%3 == 0):
-            if(i in _target and i + 1 in _target and i + 2 in _target):
+        if(i%3 == 0): #if the cell is to the absolute left:
+            if(i in _target and i + 1 in _target and i + 2 in _target): # check if 3 consecutive cells are selected. eg: (123, 456, 789)
                 return True
-        if(i < 3):
-            if(i in _target and i + 3 in _target and i + 6 in _target):
+        
+        if(i < 3): #if the value is below 3. Reason being, to check if any vertically consecutive cells are selected from top to bottom.
+            if(i in _target and i + 3 in _target and i + 6 in _target): # eg: (147, 258, 369)
                 return True
     
-    if(0 in _target and 4 in _target and 8 in _target):
+    if(0 in _target and 4 in _target and 8 in _target): #checking diagonal top left to bottom right
         return True
-    if(2 in _target and 4 in _target and 6 in _target):
+    if(2 in _target and 4 in _target and 6 in _target): #checking diagonal top right to bottom left
         return True
-    return False
+    return False #if none of the above returned true, then no winning scenarios where achieved.
 
 def ComputerChoose():
     global player_choice_history
@@ -60,8 +62,16 @@ while(True):
         user_input = int(user_input)
     
     player_choice_history.append(user_input - 1)
-    computer_choice_history.append(ComputerChoose())
     if(CheckTargetStatus(player_choice_history)):
         print("You won. Good job.")
+        break
+
+    computer_choice_history.append(ComputerChoose())
     if(CheckTargetStatus(computer_choice_history)):
         print("Computer won. Better luck next time.")
+        break
+
+    if(len(computer_choice_history) + len(player_choice_history) == 9):
+        print("It's a tie, better luck next time.")
+        break
+    os.system('cls' if os.name == 'nt' else 'clear')
