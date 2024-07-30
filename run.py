@@ -68,7 +68,7 @@ def gen_game_grid():
 print("Welcome to X||O (The Game)).")
 while True:
     print(gen_game_grid())
-    user_input = input("Choose a number from the grid to make a move; or q to quit game: ")
+    user_input = input("Choose a number from the grid to make a move; or q to quit game: \n")
     if user_input == "q":
         print("Thanks for playing the game.")
         break
