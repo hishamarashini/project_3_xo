@@ -7,28 +7,36 @@ computer_choice_history = []
 
 def CheckTargetStatus(_target):
     for i in range(3):
-        if(i%3 == 0): #if the cell is to the absolute left:
-            if(i in _target and i + 1 in _target and i + 2 in _target): # check if 3 consecutive cells are selected. eg: (123, 456, 789)
+        #if the cell is to the absolute left:
+        if(i%3 == 0): 
+            # check if 3 consecutive cells are selected. eg: (123, 456, 789)
+            if(i in _target and i + 1 in _target and i + 2 in _target): 
                 return True
-        
-        if(i < 3): #if the value is below 3. Reason being, to check if any vertically consecutive cells are selected from top to bottom.
-            if(i in _target and i + 3 in _target and i + 6 in _target): # eg: (147, 258, 369)
+        #if the value is below 3. Reason being, to check if any vertically consecutive cells are selected from top to bottom eg: (147, 258, 369)
+        if(i < 3): 
+            if(i in _target and i + 3 in _target and i + 6 in _target): 
                 return True
     
-    if(0 in _target and 4 in _target and 8 in _target): #checking diagonal top left to bottom right
+    #checking diagonal top left to bottom right
+    if(0 in _target and 4 in _target and 8 in _target): 
         return True
-    if(2 in _target and 4 in _target and 6 in _target): #checking diagonal top right to bottom left
+    #checking diagonal top right to bottom left
+    if(2 in _target and 4 in _target and 6 in _target): 
         return True
-    return False #if none of the above returned true, then no winning scenarios where achieved.
+    #if none of the above returned true, then no winning scenarios where achieved.
+    return False 
 
 def ComputerChoose():
     global player_choice_history
     global computer_choice_history
     choice = -1
     while True:
-        random_choice = random.randint(0, 8) # choosing a random number from the valid cells in the grid
-        if(random_choice not in player_choice_history and random_choice not in computer_choice_history): # checking if the random choice collides with a previous choice
-            choice = random_choice # if it doesnt, choose this cell and break out of the loop. else repeat until it doesn't collide
+        # choosing a random number from the valid cells in the grid
+        random_choice = random.randint(0, 8) 
+        # checking if the random choice collides with a previous choice
+        if(random_choice not in player_choice_history and random_choice not in computer_choice_history): 
+            # if it doesnt, choose this cell and break out of the loop. else repeat until it doesn't collide
+            choice = random_choice 
             break
     return choice
 
