@@ -52,6 +52,7 @@ def GenGameGrid():
     
     return to_return
 
+print("Welcome to X||O (The Game)).")
 while(True):
     print(GenGameGrid())
     user_input = input("Choose a number from the grid to make a move; or q to quit game: ")
@@ -63,15 +64,21 @@ while(True):
     
     player_choice_history.append(user_input - 1)
     if(CheckTargetStatus(player_choice_history)):
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("You won. Good job.")
+        print(GenGameGrid())
+        break
+
+    if(len(computer_choice_history) + len(player_choice_history) >= 9):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("It's a tie, better luck next time.")
+        print(GenGameGrid())
         break
 
     computer_choice_history.append(ComputerChoose())
     if(CheckTargetStatus(computer_choice_history)):
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("Computer won. Better luck next time.")
-        break
-
-    if(len(computer_choice_history) + len(player_choice_history) == 9):
-        print("It's a tie, better luck next time.")
+        print(GenGameGrid())
         break
     os.system('cls' if os.name == 'nt' else 'clear')
